@@ -14,33 +14,34 @@
 <link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}" />
 <link rel="stylesheet" th:href="@{/css/vistasignup.css}" />
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script type="text/javascript"  th:href="@{/js/jquery.min.js}" ></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js">
-<script type="text/javascript"   th:fragment="javascript">
+<script type="text/javascript" th:href="@{/js/jquery.min.js}"></script>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.3.1.js">
+	<script type="text/javascript"   th:fragment="javascript">
 
-$('document').ready(function(){			
-	var password = document.getElementById("password")
-	var confirmPassword = document.getElementById("confirmpassword");
-	
-	function validatePassword(){
-	  if(password.value != confirmpassword.value) {
-	    confirmPassword.setCustomValidity("Passwords Don't Match");
-	    /*   $(".alert").toggleClass('in out'); 
-			    return false; // Keep close.bs.alert event from removing from DOM
+	$('document').ready(function() {
+		var password = document.getElementById("password")
+		var confirmPassword = document.getElementById("confirmpassword");
+
+		function validatePassword() {
+			if (password.value != confirmpassword.value) {
+				confirmPassword.setCustomValidity("Passwords Don't Match");
+				/*   $(".alert").toggleClass('in out'); 
+					    return false; // Keep close.bs.alert event from removing from DOM
+					}
+
+
+					$("#btn").on("click", toggleAlert);
+					$('#bsalert').on('close.bs.alert', toggleAlert)
+				 */
+
+			} else {
+				confirmPassword.setCustomValidity('');
 			}
-
-
-			$("#btn").on("click", toggleAlert);
-			$('#bsalert').on('close.bs.alert', toggleAlert)
-		  */
-		  
-	  } else {
-	    confirmPassword.setCustomValidity('');
-	  }
-	}	
-	password.onchange = validatePassword;
-	confirmPassword.onkeyup = validatePassword;		
-});
+		}
+		password.onchange = validatePassword;
+		confirmPassword.onkeyup = validatePassword;
+	});
 </script>
 </head>
 
@@ -50,7 +51,7 @@ $('document').ready(function(){
 		<div class="card border-primary text-center">
 			<div class="card-header text-white bg-dark">Registrar Usuario</div>
 			<div class="card-body ">
-				<form th:action="@{/register}"  method="post" th:object="${user}" >
+				<form th:action="@{/register}" method="post" th:object="${user}">
 
 					<div class="form-group">
 						<input type="text" th:field="*{userName}" name="userName"
@@ -60,16 +61,23 @@ $('document').ready(function(){
 
 					<div class="form-group">
 						<input type="password" th:field="*{password}" name="password"
-							id="password" class="form-control"  placeholder="clave" required />
+							id="password" class="form-control" placeholder="clave" required />
 					</div>
 
-					
+					<div class="form-group">
+						<input th:field="*{roles}"  name="ROLE_ADMIN" type="radio" value="ROLE_ADMIN" /> Role Admin
+
+						<br /> <input th:field="*{roles}" name="ROLE_USER" type="radio" value="ROLE_USER" />Role User
+					</div>
+
 
 					<div class="form-group">
-						<button type="submit" onclick="validatePassword()" class="btn btn-success">Register</button>
+						<button type="submit" onclick="validatePassword()"
+							class="btn btn-success">Register</button>
 						<span> Already registered? <a href="/" th:href="@{/login}">Login
 								here</a></span>
 					</div>
+
 
 				</form>
 
@@ -82,12 +90,9 @@ $('document').ready(function(){
 			<div class="alert alert-info">Te has registrado correctamente.!</div>
 		</div>
 		<div th:if="${param.warning}">
-			<div class="alert alert-warning">El usuario se encuentra registrado.!</div>
+			<div class="alert alert-warning">El usuario se encuentra
+				registrado.!</div>
 		</div>
-
-
-
-
 </body>
 
 </html>

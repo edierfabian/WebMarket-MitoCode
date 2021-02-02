@@ -1,6 +1,10 @@
 package com.marketmito.apporder.UserRegister;
 
+import java.util.List;
+
 import javax.persistence.Column;
+
+import com.marketmito.apporder.entity.Role;
 
 
 public class UsersRegister {
@@ -10,6 +14,8 @@ public class UsersRegister {
 	
 	@Column(name="password",length = 60,unique = true)
 	private String password;
+	
+	private String roles;
 	
 	private Boolean enabled;
 
@@ -35,6 +41,14 @@ public class UsersRegister {
 
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
+	}
+
+	public String getRoles() {
+		return roles;
+	}
+
+	public void setRoles(String roles) {
+		this.roles = roles;
 	}
 
 	
